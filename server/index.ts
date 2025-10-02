@@ -1,7 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
-import { handleDemo } from "./routes/demo";
+// import { handleDemo } from "./routes/demo";
 import { handleIngest } from "./routes/ingest";
 import { handleTrainModel, handleGetModels, handlePredict } from "./routes/ml";
 import { handleGenerateSchedule, handleGetScheduleHistory, handleGetScheduleDetails } from "./routes/scheduling";
@@ -20,7 +20,7 @@ export function createServer() {
     res.json({ message: ping });
   });
 
-  app.get("/api/demo", handleDemo);
+  // app.get("/api/demo", handleDemo);
   app.post("/api/ingest", handleIngest);
   
   // ML API routes
