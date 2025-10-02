@@ -4,9 +4,9 @@ import path from "path";
 export default defineConfig({
   build: {
     lib: {
-      entry: path.resolve(__dirname, "server/node-build.ts"),
+      entry: path.resolve(__dirname, "server/index.ts"),
       name: "server",
-      fileName: "server", // This ensures the output is server.mjs
+      fileName: "server",
       formats: ["es"],
     },
     outDir: "dist/server",
