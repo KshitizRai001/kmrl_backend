@@ -11,8 +11,7 @@
     ]
   },
   "scripts": {
-    "start": "ts-node server/index.ts",
-    "postinstall": "pip install -r advanced_model/requirements.txt"
+  "start": "ts-node server/index.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.58.0",

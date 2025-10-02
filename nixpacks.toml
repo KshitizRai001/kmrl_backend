@@ -1,0 +1,14 @@
+[phases.setup]
+nixPkgs = ["python311", "python311Packages.pip"]
+
+[phases.install]
+cmds = [
+  "pip install -r advanced_model/requirements.txt",
+  "pnpm install --frozen-lockfile --prefer-offline"
+]
+
+[phases.build]
+cmds = []
+
+[phases.start]
+cmds = ["pnpm start"]
