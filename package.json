@@ -11,9 +11,15 @@
     ]
   },
   "scripts": {
-  "build": "tsc",
-  "start": "node dist/server/node-build.js"
+    "build": "tsc",
+    "postbuild": "ls -l dist/server",
+    "start": "node dist/server/node-build.js"
   },
+  "files": [
+    "dist",
+    "package.json",
+    "nixpacks.toml"
+  ],
   "dependencies": {
     "@supabase/supabase-js": "^2.58.0",
     "dotenv": "^17.2.1",
