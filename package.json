@@ -12,7 +12,7 @@
   },
   "scripts": {
   "build": "tsc",
-  "start": "node dist/server/index.js"
+  "start": "node dist/server/node-build.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.58.0",
