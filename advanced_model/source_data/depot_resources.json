@@ -1,0 +1,5 @@
+{
+    "cleaning_bays": 4,
+    "cleaning_staff_available": 8,
+    "deep_clean_threshold_days": 7
+}

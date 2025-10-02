@@ -1,0 +1,1663 @@
+{
+    "planning_date": "2025-10-01",
+    "solver_status": "FEASIBLE",
+    "total_trains_used": 19,
+    "trips_serviced": 254,
+    "trips_unserviced": 1,
+    "unserviced_trip_ids": [
+        "WK_253"
+    ],
+    "induction_ranking": [
+        {
+            "Train ID": "T21",
+            "Status": "STANDBY",
+            "Final Mileage": 63068
+        },
+        {
+            "Train ID": "T18",
+            "Status": "IN SERVICE",
+            "Final Mileage": 62413
+        },
+        {
+            "Train ID": "T02",
+            "Status": "IN SERVICE",
+            "Final Mileage": 67552
+        },
+        {
+            "Train ID": "T01",
+            "Status": "IN SERVICE",
+            "Final Mileage": 67866
+        },
+        {
+            "Train ID": "T11",
+            "Status": "IN SERVICE",
+            "Final Mileage": 71748
+        },
+        {
+            "Train ID": "T20",
+            "Status": "IN SERVICE",
+            "Final Mileage": 72253
+        },
+        {
+            "Train ID": "T17",
+            "Status": "IN SERVICE",
+            "Final Mileage": 80535
+        },
+        {
+            "Train ID": "T16",
+            "Status": "IN SERVICE",
+            "Final Mileage": 82473
+        },
+        {
+            "Train ID": "T07",
+            "Status": "IN SERVICE",
+            "Final Mileage": 83462
+        },
+        {
+            "Train ID": "T24",
+            "Status": "IN SERVICE",
+            "Final Mileage": 84228
+        },
+        {
+            "Train ID": "T23",
+            "Status": "IN SERVICE",
+            "Final Mileage": 84831
+        },
+        {
+            "Train ID": "T10",
+            "Status": "IN SERVICE",
+            "Final Mileage": 85186
+        },
+        {
+            "Train ID": "T06",
+            "Status": "IN SERVICE",
+            "Final Mileage": 86455
+        },
+        {
+            "Train ID": "T25",
+            "Status": "IN SERVICE",
+            "Final Mileage": 90368
+        },
+        {
+            "Train ID": "T12",
+            "Status": "IN SERVICE",
+            "Final Mileage": 91194
+        },
+        {
+            "Train ID": "T09",
+            "Status": "IN SERVICE",
+            "Final Mileage": 94518
+        },
+        {
+            "Train ID": "T13",
+            "Status": "IN SERVICE",
+            "Final Mileage": 97479
+        },
+        {
+            "Train ID": "T22",
+            "Status": "IN SERVICE",
+            "Final Mileage": 98585
+        },
+        {
+            "Train ID": "T14",
+            "Status": "IN SERVICE",
+            "Final Mileage": 101238
+        },
+        {
+            "Train ID": "T04",
+            "Status": "IN SERVICE",
+            "Final Mileage": 102803
+        },
+        {
+            "Train ID": "T03",
+            "Status": "HELD FOR MAINTENANCE (Job Card Open)",
+            "Final Mileage": 70476
+        },
+        {
+            "Train ID": "T08",
+            "Status": "HELD FOR MAINTENANCE (Job Card Open)",
+            "Final Mileage": 89026
+        },
+        {
+            "Train ID": "T05",
+            "Status": "HELD FOR MAINTENANCE (Job Card Open)",
+            "Final Mileage": 90846
+        },
+        {
+            "Train ID": "T19",
+            "Status": "HELD FOR CLEANING",
+            "Final Mileage": 84263
+        },
+        {
+            "Train ID": "T15",
+            "Status": "HELD FOR CLEANING",
+            "Final Mileage": 84899
+        }
+    ],
+    "trip_assignments": [
+        {
+            "trip_id": "WK_4",
+            "train_id": "T16",
+            "start_time": "05:00:00",
+            "end_time": "05:49:54"
+        },
+        {
+            "trip_id": "WK_256",
+            "train_id": "T18",
+            "start_time": "05:20:00",
+            "end_time": "05:49:20"
+        },
+        {
+            "trip_id": "WK_18",
+            "train_id": "T11",
+            "start_time": "05:45:00",
+            "end_time": "06:26:59"
+        },
+        {
+            "trip_id": "WK_12",
+            "train_id": "T16",
+            "start_time": "05:57:00",
+            "end_time": "06:37:58"
+        },
+        {
+            "trip_id": "WK_3",
+            "train_id": "T25",
+            "start_time": "06:00:00",
+            "end_time": "06:54:05"
+        },
+        {
+            "trip_id": "WK_1",
+            "train_id": "T09",
+            "start_time": "06:00:00",
+            "end_time": "06:54:14"
+        },
+        {
+            "trip_id": "WK_9",
+            "train_id": "T18",
+            "start_time": "06:15:00",
+            "end_time": "06:23:40"
+        },
+        {
+            "trip_id": "WK_6",
+            "train_id": "T23",
+            "start_time": "06:15:00",
+            "end_time": "07:05:28"
+        },
+        {
+            "trip_id": "WK_15",
+            "train_id": "T12",
+            "start_time": "06:15:00",
+            "end_time": "07:07:28"
+        },
+        {
+            "trip_id": "WK_17",
+            "train_id": "T11",
+            "start_time": "06:30:00",
+            "end_time": "07:23:26"
+        },
+        {
+            "trip_id": "WK_8",
+            "train_id": "T13",
+            "start_time": "06:30:00",
+            "end_time": "07:23:38"
+        },
+        {
+            "trip_id": "WK_11",
+            "train_id": "T18",
+            "start_time": "06:45:00",
+            "end_time": "07:35:28"
+        },
+        {
+            "trip_id": "WK_20",
+            "train_id": "T16",
+            "start_time": "06:45:00",
+            "end_time": "07:37:28"
+        },
+        {
+            "trip_id": "WK_2",
+            "train_id": "T20",
+            "start_time": "07:00:00",
+            "end_time": "07:49:58"
+        },
+        {
+            "trip_id": "WK_5",
+            "train_id": "T09",
+            "start_time": "07:00:25",
+            "end_time": "07:54:03"
+        },
+        {
+            "trip_id": "WK_30",
+            "train_id": "T25",
+            "start_time": "07:03:00",
+            "end_time": "07:45:44"
+        },
+        {
+            "trip_id": "WK_34",
+            "train_id": "T17",
+            "start_time": "07:07:00",
+            "end_time": "07:14:51"
+        },
+        {
+            "trip_id": "WK_7",
+            "train_id": "T10",
+            "start_time": "07:10:00",
+            "end_time": "07:59:58"
+        },
+        {
+            "trip_id": "WK_16",
+            "train_id": "T24",
+            "start_time": "07:11:25",
+            "end_time": "08:01:53"
+        },
+        {
+            "trip_id": "WK_25",
+            "train_id": "T02",
+            "start_time": "07:20:00",
+            "end_time": "08:12:55"
+        },
+        {
+            "trip_id": "WK_33",
+            "train_id": "T14",
+            "start_time": "07:22:25",
+            "end_time": "08:15:33"
+        },
+        {
+            "trip_id": "WK_41",
+            "train_id": "T22",
+            "start_time": "07:26:19",
+            "end_time": "08:09:03"
+        },
+        {
+            "trip_id": "WK_10",
+            "train_id": "T12",
+            "start_time": "07:30:00",
+            "end_time": "08:19:58"
+        },
+        {
+            "trip_id": "WK_19",
+            "train_id": "T23",
+            "start_time": "07:33:25",
+            "end_time": "08:23:53"
+        },
+        {
+            "trip_id": "WK_13",
+            "train_id": "T11",
+            "start_time": "07:40:00",
+            "end_time": "08:32:58"
+        },
+        {
+            "trip_id": "WK_21",
+            "train_id": "T16",
+            "start_time": "07:43:25",
+            "end_time": "08:36:13"
+        },
+        {
+            "trip_id": "WK_49",
+            "train_id": "T13",
+            "start_time": "07:48:00",
+            "end_time": "08:30:44"
+        },
+        {
+            "trip_id": "WK_29",
+            "train_id": "T17",
+            "start_time": "07:50:00",
+            "end_time": "08:39:58"
+        },
+        {
+            "trip_id": "WK_22",
+            "train_id": "T20",
+            "start_time": "07:56:25",
+            "end_time": "08:47:12"
+        },
+        {
+            "trip_id": "WK_14",
+            "train_id": "T07",
+            "start_time": "08:00:00",
+            "end_time": "08:49:45"
+        },
+        {
+            "trip_id": "WK_80",
+            "train_id": "T18",
+            "start_time": "08:00:00",
+            "end_time": "08:07:51"
+        },
+        {
+            "trip_id": "WK_23",
+            "train_id": "T10",
+            "start_time": "08:03:25",
+            "end_time": "08:54:12"
+        },
+        {
+            "trip_id": "WK_24",
+            "train_id": "T25",
+            "start_time": "08:07:00",
+            "end_time": "08:57:25"
+        },
+        {
+            "trip_id": "WK_61",
+            "train_id": "T22",
+            "start_time": "08:10:25",
+            "end_time": "09:01:12"
+        },
+        {
+            "trip_id": "WK_40",
+            "train_id": "T02",
+            "start_time": "08:14:00",
+            "end_time": "09:04:25"
+        },
+        {
+            "trip_id": "WK_26",
+            "train_id": "T18",
+            "start_time": "08:17:25",
+            "end_time": "09:08:12"
+        },
+        {
+            "trip_id": "WK_81",
+            "train_id": "T09",
+            "start_time": "08:21:00",
+            "end_time": "08:28:51"
+        },
+        {
+            "trip_id": "WK_35",
+            "train_id": "T06",
+            "start_time": "08:21:00",
+            "end_time": "09:11:25"
+        },
+        {
+            "trip_id": "WK_27",
+            "train_id": "T23",
+            "start_time": "08:24:25",
+            "end_time": "09:15:12"
+        },
+        {
+            "trip_id": "WK_36",
+            "train_id": "T14",
+            "start_time": "08:28:00",
+            "end_time": "09:18:25"
+        },
+        {
+            "trip_id": "WK_70",
+            "train_id": "T09",
+            "start_time": "08:31:25",
+            "end_time": "09:22:12"
+        },
+        {
+            "trip_id": "WK_48",
+            "train_id": "T11",
+            "start_time": "08:35:00",
+            "end_time": "09:25:25"
+        },
+        {
+            "trip_id": "WK_28",
+            "train_id": "T13",
+            "start_time": "08:38:25",
+            "end_time": "09:29:12"
+        },
+        {
+            "trip_id": "WK_37",
+            "train_id": "T01",
+            "start_time": "08:42:00",
+            "end_time": "09:32:25"
+        },
+        {
+            "trip_id": "WK_31",
+            "train_id": "T17",
+            "start_time": "08:45:25",
+            "end_time": "09:36:12"
+        },
+        {
+            "trip_id": "WK_54",
+            "train_id": "T04",
+            "start_time": "08:49:00",
+            "end_time": "09:39:25"
+        },
+        {
+            "trip_id": "WK_32",
+            "train_id": "T16",
+            "start_time": "08:52:25",
+            "end_time": "09:43:12"
+        },
+        {
+            "trip_id": "WK_57",
+            "train_id": "T07",
+            "start_time": "08:56:00",
+            "end_time": "09:46:25"
+        },
+        {
+            "trip_id": "WK_38",
+            "train_id": "T10",
+            "start_time": "08:59:25",
+            "end_time": "09:50:12"
+        },
+        {
+            "trip_id": "WK_60",
+            "train_id": "T22",
+            "start_time": "09:03:00",
+            "end_time": "09:53:25"
+        },
+        {
+            "trip_id": "WK_42",
+            "train_id": "T24",
+            "start_time": "09:06:25",
+            "end_time": "09:57:12"
+        },
+        {
+            "trip_id": "WK_64",
+            "train_id": "T20",
+            "start_time": "09:10:00",
+            "end_time": "10:00:25"
+        },
+        {
+            "trip_id": "WK_44",
+            "train_id": "T18",
+            "start_time": "09:13:25",
+            "end_time": "10:04:12"
+        },
+        {
+            "trip_id": "WK_67",
+            "train_id": "T25",
+            "start_time": "09:17:00",
+            "end_time": "10:07:25"
+        },
+        {
+            "trip_id": "WK_46",
+            "train_id": "T12",
+            "start_time": "09:20:25",
+            "end_time": "10:11:12"
+        },
+        {
+            "trip_id": "WK_69",
+            "train_id": "T14",
+            "start_time": "09:24:00",
+            "end_time": "10:14:25"
+        },
+        {
+            "trip_id": "WK_50",
+            "train_id": "T09",
+            "start_time": "09:27:25",
+            "end_time": "10:18:12"
+        },
+        {
+            "trip_id": "WK_72",
+            "train_id": "T13",
+            "start_time": "09:31:00",
+            "end_time": "10:22:35"
+        },
+        {
+            "trip_id": "WK_52",
+            "train_id": "T02",
+            "start_time": "09:34:25",
+            "end_time": "10:25:12"
+        },
+        {
+            "trip_id": "WK_74",
+            "train_id": "T11",
+            "start_time": "09:38:00",
+            "end_time": "10:28:55"
+        },
+        {
+            "trip_id": "WK_55",
+            "train_id": "T01",
+            "start_time": "09:41:25",
+            "end_time": "10:31:22"
+        },
+        {
+            "trip_id": "WK_76",
+            "train_id": "T04",
+            "start_time": "09:45:00",
+            "end_time": "10:34:38"
+        },
+        {
+            "trip_id": "WK_58",
+            "train_id": "T16",
+            "start_time": "09:48:25",
+            "end_time": "10:39:12"
+        },
+        {
+            "trip_id": "WK_39",
+            "train_id": "T06",
+            "start_time": "09:52:00",
+            "end_time": "10:42:25"
+        },
+        {
+            "trip_id": "WK_62",
+            "train_id": "T22",
+            "start_time": "09:55:25",
+            "end_time": "10:46:12"
+        },
+        {
+            "trip_id": "WK_43",
+            "train_id": "T24",
+            "start_time": "09:59:00",
+            "end_time": "10:49:25"
+        },
+        {
+            "trip_id": "WK_65",
+            "train_id": "T23",
+            "start_time": "10:02:25",
+            "end_time": "10:53:12"
+        },
+        {
+            "trip_id": "WK_45",
+            "train_id": "T10",
+            "start_time": "10:06:00",
+            "end_time": "10:58:05"
+        },
+        {
+            "trip_id": "WK_68",
+            "train_id": "T17",
+            "start_time": "10:10:55",
+            "end_time": "11:01:23"
+        },
+        {
+            "trip_id": "WK_47",
+            "train_id": "T25",
+            "start_time": "10:13:00",
+            "end_time": "11:05:55"
+        },
+        {
+            "trip_id": "WK_71",
+            "train_id": "T07",
+            "start_time": "10:19:25",
+            "end_time": "11:09:53"
+        },
+        {
+            "trip_id": "WK_51",
+            "train_id": "T09",
+            "start_time": "10:20:00",
+            "end_time": "11:11:45"
+        },
+        {
+            "trip_id": "WK_53",
+            "train_id": "T12",
+            "start_time": "10:27:00",
+            "end_time": "11:17:25"
+        },
+        {
+            "trip_id": "WK_73",
+            "train_id": "T18",
+            "start_time": "10:27:55",
+            "end_time": "11:18:23"
+        },
+        {
+            "trip_id": "WK_75",
+            "train_id": "T11",
+            "start_time": "10:30:35",
+            "end_time": "10:38:00"
+        },
+        {
+            "trip_id": "WK_56",
+            "train_id": "T20",
+            "start_time": "10:33:00",
+            "end_time": "11:22:58"
+        },
+        {
+            "trip_id": "WK_77",
+            "train_id": "T13",
+            "start_time": "10:36:25",
+            "end_time": "11:26:53"
+        },
+        {
+            "trip_id": "WK_59",
+            "train_id": "T16",
+            "start_time": "10:41:30",
+            "end_time": "11:31:28"
+        },
+        {
+            "trip_id": "WK_78",
+            "train_id": "T02",
+            "start_time": "10:44:55",
+            "end_time": "11:35:23"
+        },
+        {
+            "trip_id": "WK_63",
+            "train_id": "T06",
+            "start_time": "10:50:00",
+            "end_time": "11:39:58"
+        },
+        {
+            "trip_id": "WK_79",
+            "train_id": "T11",
+            "start_time": "10:53:25",
+            "end_time": "11:43:53"
+        },
+        {
+            "trip_id": "WK_66",
+            "train_id": "T22",
+            "start_time": "10:58:30",
+            "end_time": "11:48:28"
+        },
+        {
+            "trip_id": "WK_109",
+            "train_id": "T24",
+            "start_time": "11:01:55",
+            "end_time": "11:52:23"
+        },
+        {
+            "trip_id": "WK_82",
+            "train_id": "T01",
+            "start_time": "11:07:00",
+            "end_time": "11:56:58"
+        },
+        {
+            "trip_id": "WK_113",
+            "train_id": "T10",
+            "start_time": "11:10:25",
+            "end_time": "12:00:53"
+        },
+        {
+            "trip_id": "WK_93",
+            "train_id": "T17",
+            "start_time": "11:15:30",
+            "end_time": "12:05:28"
+        },
+        {
+            "trip_id": "WK_117",
+            "train_id": "T18",
+            "start_time": "11:19:15",
+            "end_time": "12:09:43"
+        },
+        {
+            "trip_id": "WK_96",
+            "train_id": "T23",
+            "start_time": "11:24:00",
+            "end_time": "12:13:58"
+        },
+        {
+            "trip_id": "WK_83",
+            "train_id": "T12",
+            "start_time": "11:28:14",
+            "end_time": "12:18:42"
+        },
+        {
+            "trip_id": "WK_99",
+            "train_id": "T16",
+            "start_time": "11:32:30",
+            "end_time": "12:22:28"
+        },
+        {
+            "trip_id": "WK_85",
+            "train_id": "T09",
+            "start_time": "11:36:44",
+            "end_time": "12:27:12"
+        },
+        {
+            "trip_id": "WK_102",
+            "train_id": "T20",
+            "start_time": "11:41:00",
+            "end_time": "12:30:58"
+        },
+        {
+            "trip_id": "WK_87",
+            "train_id": "T25",
+            "start_time": "11:45:14",
+            "end_time": "12:35:42"
+        },
+        {
+            "trip_id": "WK_105",
+            "train_id": "T07",
+            "start_time": "11:49:30",
+            "end_time": "12:39:28"
+        },
+        {
+            "trip_id": "WK_89",
+            "train_id": "T13",
+            "start_time": "11:53:44",
+            "end_time": "12:44:12"
+        },
+        {
+            "trip_id": "WK_108",
+            "train_id": "T02",
+            "start_time": "11:58:00",
+            "end_time": "12:47:58"
+        },
+        {
+            "trip_id": "WK_91",
+            "train_id": "T10",
+            "start_time": "12:02:14",
+            "end_time": "12:52:42"
+        },
+        {
+            "trip_id": "WK_112",
+            "train_id": "T22",
+            "start_time": "12:06:30",
+            "end_time": "12:56:28"
+        },
+        {
+            "trip_id": "WK_94",
+            "train_id": "T24",
+            "start_time": "12:10:44",
+            "end_time": "13:01:12"
+        },
+        {
+            "trip_id": "WK_116",
+            "train_id": "T18",
+            "start_time": "12:15:00",
+            "end_time": "13:04:58"
+        },
+        {
+            "trip_id": "WK_97",
+            "train_id": "T12",
+            "start_time": "12:19:14",
+            "end_time": "13:09:42"
+        },
+        {
+            "trip_id": "WK_84",
+            "train_id": "T16",
+            "start_time": "12:23:30",
+            "end_time": "13:13:28"
+        },
+        {
+            "trip_id": "WK_100",
+            "train_id": "T11",
+            "start_time": "12:27:44",
+            "end_time": "13:18:12"
+        },
+        {
+            "trip_id": "WK_86",
+            "train_id": "T09",
+            "start_time": "12:32:00",
+            "end_time": "13:21:58"
+        },
+        {
+            "trip_id": "WK_103",
+            "train_id": "T17",
+            "start_time": "12:36:14",
+            "end_time": "13:26:42"
+        },
+        {
+            "trip_id": "WK_88",
+            "train_id": "T07",
+            "start_time": "12:40:30",
+            "end_time": "13:30:28"
+        },
+        {
+            "trip_id": "WK_106",
+            "train_id": "T13",
+            "start_time": "12:44:44",
+            "end_time": "13:35:12"
+        },
+        {
+            "trip_id": "WK_90",
+            "train_id": "T06",
+            "start_time": "12:49:00",
+            "end_time": "13:38:58"
+        },
+        {
+            "trip_id": "WK_110",
+            "train_id": "T25",
+            "start_time": "12:53:14",
+            "end_time": "13:43:42"
+        },
+        {
+            "trip_id": "WK_92",
+            "train_id": "T20",
+            "start_time": "12:57:30",
+            "end_time": "13:47:28"
+        },
+        {
+            "trip_id": "WK_114",
+            "train_id": "T23",
+            "start_time": "13:01:44",
+            "end_time": "13:52:12"
+        },
+        {
+            "trip_id": "WK_95",
+            "train_id": "T24",
+            "start_time": "13:06:00",
+            "end_time": "13:55:58"
+        },
+        {
+            "trip_id": "WK_118",
+            "train_id": "T14",
+            "start_time": "13:10:14",
+            "end_time": "14:00:42"
+        },
+        {
+            "trip_id": "WK_98",
+            "train_id": "T22",
+            "start_time": "13:14:30",
+            "end_time": "14:04:28"
+        },
+        {
+            "trip_id": "WK_120",
+            "train_id": "T18",
+            "start_time": "13:18:44",
+            "end_time": "14:09:12"
+        },
+        {
+            "trip_id": "WK_101",
+            "train_id": "T09",
+            "start_time": "13:23:00",
+            "end_time": "14:12:58"
+        },
+        {
+            "trip_id": "WK_122",
+            "train_id": "T11",
+            "start_time": "13:27:14",
+            "end_time": "14:17:42"
+        },
+        {
+            "trip_id": "WK_104",
+            "train_id": "T10",
+            "start_time": "13:31:30",
+            "end_time": "14:21:28"
+        },
+        {
+            "trip_id": "WK_124",
+            "train_id": "T16",
+            "start_time": "13:35:44",
+            "end_time": "14:26:12"
+        },
+        {
+            "trip_id": "WK_107",
+            "train_id": "T17",
+            "start_time": "13:40:00",
+            "end_time": "14:29:58"
+        },
+        {
+            "trip_id": "WK_126",
+            "train_id": "T25",
+            "start_time": "13:44:14",
+            "end_time": "14:34:42"
+        },
+        {
+            "trip_id": "WK_111",
+            "train_id": "T20",
+            "start_time": "13:48:30",
+            "end_time": "14:38:28"
+        },
+        {
+            "trip_id": "WK_128",
+            "train_id": "T12",
+            "start_time": "13:52:44",
+            "end_time": "14:43:12"
+        },
+        {
+            "trip_id": "WK_115",
+            "train_id": "T24",
+            "start_time": "13:57:00",
+            "end_time": "14:46:58"
+        },
+        {
+            "trip_id": "WK_130",
+            "train_id": "T01",
+            "start_time": "14:01:14",
+            "end_time": "14:51:42"
+        },
+        {
+            "trip_id": "WK_119",
+            "train_id": "T13",
+            "start_time": "14:05:30",
+            "end_time": "14:55:28"
+        },
+        {
+            "trip_id": "WK_132",
+            "train_id": "T18",
+            "start_time": "14:09:44",
+            "end_time": "15:00:12"
+        },
+        {
+            "trip_id": "WK_121",
+            "train_id": "T14",
+            "start_time": "14:14:00",
+            "end_time": "15:03:58"
+        },
+        {
+            "trip_id": "WK_134",
+            "train_id": "T06",
+            "start_time": "14:18:14",
+            "end_time": "15:08:42"
+        },
+        {
+            "trip_id": "WK_123",
+            "train_id": "T02",
+            "start_time": "14:22:30",
+            "end_time": "15:12:28"
+        },
+        {
+            "trip_id": "WK_136",
+            "train_id": "T16",
+            "start_time": "14:26:44",
+            "end_time": "15:17:12"
+        },
+        {
+            "trip_id": "WK_125",
+            "train_id": "T07",
+            "start_time": "14:31:00",
+            "end_time": "15:20:58"
+        },
+        {
+            "trip_id": "WK_138",
+            "train_id": "T09",
+            "start_time": "14:35:14",
+            "end_time": "15:25:42"
+        },
+        {
+            "trip_id": "WK_127",
+            "train_id": "T20",
+            "start_time": "14:39:30",
+            "end_time": "15:29:28"
+        },
+        {
+            "trip_id": "WK_140",
+            "train_id": "T12",
+            "start_time": "14:43:44",
+            "end_time": "15:34:12"
+        },
+        {
+            "trip_id": "WK_129",
+            "train_id": "T23",
+            "start_time": "14:48:00",
+            "end_time": "15:37:58"
+        },
+        {
+            "trip_id": "WK_142",
+            "train_id": "T11",
+            "start_time": "14:52:14",
+            "end_time": "15:42:42"
+        },
+        {
+            "trip_id": "WK_131",
+            "train_id": "T17",
+            "start_time": "14:56:30",
+            "end_time": "15:46:28"
+        },
+        {
+            "trip_id": "WK_144",
+            "train_id": "T13",
+            "start_time": "15:00:44",
+            "end_time": "15:51:12"
+        },
+        {
+            "trip_id": "WK_133",
+            "train_id": "T10",
+            "start_time": "15:05:00",
+            "end_time": "15:54:58"
+        },
+        {
+            "trip_id": "WK_146",
+            "train_id": "T25",
+            "start_time": "15:09:14",
+            "end_time": "15:59:42"
+        },
+        {
+            "trip_id": "WK_135",
+            "train_id": "T02",
+            "start_time": "15:13:30",
+            "end_time": "16:03:28"
+        },
+        {
+            "trip_id": "WK_148",
+            "train_id": "T22",
+            "start_time": "15:17:44",
+            "end_time": "16:08:12"
+        },
+        {
+            "trip_id": "WK_137",
+            "train_id": "T01",
+            "start_time": "15:22:00",
+            "end_time": "16:11:58"
+        },
+        {
+            "trip_id": "WK_150",
+            "train_id": "T24",
+            "start_time": "15:26:14",
+            "end_time": "16:16:09"
+        },
+        {
+            "trip_id": "WK_139",
+            "train_id": "T16",
+            "start_time": "15:30:30",
+            "end_time": "16:22:48"
+        },
+        {
+            "trip_id": "WK_152",
+            "train_id": "T14",
+            "start_time": "15:34:44",
+            "end_time": "16:26:32"
+        },
+        {
+            "trip_id": "WK_141",
+            "train_id": "T09",
+            "start_time": "15:39:00",
+            "end_time": "16:30:08"
+        },
+        {
+            "trip_id": "WK_172",
+            "train_id": "T18",
+            "start_time": "15:39:00",
+            "end_time": "16:21:44"
+        },
+        {
+            "trip_id": "WK_154",
+            "train_id": "T07",
+            "start_time": "15:43:14",
+            "end_time": "16:33:42"
+        },
+        {
+            "trip_id": "WK_143",
+            "train_id": "T04",
+            "start_time": "15:47:30",
+            "end_time": "16:37:28"
+        },
+        {
+            "trip_id": "WK_156",
+            "train_id": "T23",
+            "start_time": "15:51:44",
+            "end_time": "16:42:12"
+        },
+        {
+            "trip_id": "WK_145",
+            "train_id": "T20",
+            "start_time": "15:56:00",
+            "end_time": "16:45:58"
+        },
+        {
+            "trip_id": "WK_158",
+            "train_id": "T25",
+            "start_time": "16:00:55",
+            "end_time": "16:50:50"
+        },
+        {
+            "trip_id": "WK_147",
+            "train_id": "T02",
+            "start_time": "16:04:30",
+            "end_time": "16:53:48"
+        },
+        {
+            "trip_id": "WK_160",
+            "train_id": "T11",
+            "start_time": "16:07:55",
+            "end_time": "16:58:42"
+        },
+        {
+            "trip_id": "WK_149",
+            "train_id": "T10",
+            "start_time": "16:11:30",
+            "end_time": "17:01:55"
+        },
+        {
+            "trip_id": "WK_161",
+            "train_id": "T13",
+            "start_time": "16:14:55",
+            "end_time": "17:05:42"
+        },
+        {
+            "trip_id": "WK_151",
+            "train_id": "T01",
+            "start_time": "16:18:30",
+            "end_time": "17:08:55"
+        },
+        {
+            "trip_id": "WK_190",
+            "train_id": "T18",
+            "start_time": "16:21:55",
+            "end_time": "17:12:42"
+        },
+        {
+            "trip_id": "WK_171",
+            "train_id": "T22",
+            "start_time": "16:25:30",
+            "end_time": "17:15:55"
+        },
+        {
+            "trip_id": "WK_162",
+            "train_id": "T16",
+            "start_time": "16:28:55",
+            "end_time": "17:19:42"
+        },
+        {
+            "trip_id": "WK_153",
+            "train_id": "T12",
+            "start_time": "16:32:30",
+            "end_time": "17:22:55"
+        },
+        {
+            "trip_id": "WK_163",
+            "train_id": "T17",
+            "start_time": "16:35:55",
+            "end_time": "17:26:42"
+        },
+        {
+            "trip_id": "WK_155",
+            "train_id": "T24",
+            "start_time": "16:39:30",
+            "end_time": "17:29:55"
+        },
+        {
+            "trip_id": "WK_164",
+            "train_id": "T06",
+            "start_time": "16:42:55",
+            "end_time": "17:33:42"
+        },
+        {
+            "trip_id": "WK_157",
+            "train_id": "T23",
+            "start_time": "16:46:30",
+            "end_time": "17:36:55"
+        },
+        {
+            "trip_id": "WK_165",
+            "train_id": "T14",
+            "start_time": "16:49:55",
+            "end_time": "17:40:42"
+        },
+        {
+            "trip_id": "WK_159",
+            "train_id": "T07",
+            "start_time": "16:53:30",
+            "end_time": "17:43:55"
+        },
+        {
+            "trip_id": "WK_166",
+            "train_id": "T25",
+            "start_time": "16:56:55",
+            "end_time": "17:47:42"
+        },
+        {
+            "trip_id": "WK_183",
+            "train_id": "T20",
+            "start_time": "17:00:30",
+            "end_time": "17:50:55"
+        },
+        {
+            "trip_id": "WK_167",
+            "train_id": "T02",
+            "start_time": "17:03:55",
+            "end_time": "17:54:42"
+        },
+        {
+            "trip_id": "WK_186",
+            "train_id": "T04",
+            "start_time": "17:07:30",
+            "end_time": "17:57:55"
+        },
+        {
+            "trip_id": "WK_169",
+            "train_id": "T11",
+            "start_time": "17:10:55",
+            "end_time": "18:01:42"
+        },
+        {
+            "trip_id": "WK_189",
+            "train_id": "T01",
+            "start_time": "17:14:30",
+            "end_time": "18:04:55"
+        },
+        {
+            "trip_id": "WK_173",
+            "train_id": "T09",
+            "start_time": "17:17:55",
+            "end_time": "18:08:42"
+        },
+        {
+            "trip_id": "WK_193",
+            "train_id": "T22",
+            "start_time": "17:21:30",
+            "end_time": "18:11:55"
+        },
+        {
+            "trip_id": "WK_175",
+            "train_id": "T13",
+            "start_time": "17:24:55",
+            "end_time": "18:15:42"
+        },
+        {
+            "trip_id": "WK_195",
+            "train_id": "T17",
+            "start_time": "17:28:30",
+            "end_time": "18:18:55"
+        },
+        {
+            "trip_id": "WK_177",
+            "train_id": "T10",
+            "start_time": "17:31:55",
+            "end_time": "18:22:42"
+        },
+        {
+            "trip_id": "WK_197",
+            "train_id": "T06",
+            "start_time": "17:35:30",
+            "end_time": "18:25:55"
+        },
+        {
+            "trip_id": "WK_179",
+            "train_id": "T18",
+            "start_time": "17:38:55",
+            "end_time": "18:29:42"
+        },
+        {
+            "trip_id": "WK_199",
+            "train_id": "T14",
+            "start_time": "17:42:30",
+            "end_time": "18:32:55"
+        },
+        {
+            "trip_id": "WK_181",
+            "train_id": "T16",
+            "start_time": "17:45:55",
+            "end_time": "18:36:42"
+        },
+        {
+            "trip_id": "WK_201",
+            "train_id": "T23",
+            "start_time": "17:49:30",
+            "end_time": "18:39:55"
+        },
+        {
+            "trip_id": "WK_184",
+            "train_id": "T25",
+            "start_time": "17:52:55",
+            "end_time": "18:43:42"
+        },
+        {
+            "trip_id": "WK_168",
+            "train_id": "T24",
+            "start_time": "17:56:30",
+            "end_time": "18:46:55"
+        },
+        {
+            "trip_id": "WK_187",
+            "train_id": "T07",
+            "start_time": "17:59:55",
+            "end_time": "18:50:42"
+        },
+        {
+            "trip_id": "WK_170",
+            "train_id": "T02",
+            "start_time": "18:03:30",
+            "end_time": "18:53:55"
+        },
+        {
+            "trip_id": "WK_191",
+            "train_id": "T11",
+            "start_time": "18:06:55",
+            "end_time": "18:57:42"
+        },
+        {
+            "trip_id": "WK_174",
+            "train_id": "T01",
+            "start_time": "18:10:30",
+            "end_time": "19:00:55"
+        },
+        {
+            "trip_id": "WK_194",
+            "train_id": "T09",
+            "start_time": "18:13:55",
+            "end_time": "19:04:42"
+        },
+        {
+            "trip_id": "WK_176",
+            "train_id": "T20",
+            "start_time": "18:17:30",
+            "end_time": "19:07:55"
+        },
+        {
+            "trip_id": "WK_196",
+            "train_id": "T12",
+            "start_time": "18:20:55",
+            "end_time": "19:11:42"
+        },
+        {
+            "trip_id": "WK_178",
+            "train_id": "T13",
+            "start_time": "18:24:30",
+            "end_time": "19:14:55"
+        },
+        {
+            "trip_id": "WK_198",
+            "train_id": "T22",
+            "start_time": "18:27:55",
+            "end_time": "19:18:42"
+        },
+        {
+            "trip_id": "WK_180",
+            "train_id": "T06",
+            "start_time": "18:31:30",
+            "end_time": "19:21:55"
+        },
+        {
+            "trip_id": "WK_200",
+            "train_id": "T18",
+            "start_time": "18:34:55",
+            "end_time": "19:25:42"
+        },
+        {
+            "trip_id": "WK_182",
+            "train_id": "T10",
+            "start_time": "18:38:30",
+            "end_time": "19:28:55"
+        },
+        {
+            "trip_id": "WK_202",
+            "train_id": "T14",
+            "start_time": "18:41:55",
+            "end_time": "19:32:42"
+        },
+        {
+            "trip_id": "WK_185",
+            "train_id": "T16",
+            "start_time": "18:45:30",
+            "end_time": "19:36:45"
+        },
+        {
+            "trip_id": "WK_205",
+            "train_id": "T25",
+            "start_time": "18:48:55",
+            "end_time": "19:39:42"
+        },
+        {
+            "trip_id": "WK_188",
+            "train_id": "T24",
+            "start_time": "18:52:30",
+            "end_time": "19:42:55"
+        },
+        {
+            "trip_id": "WK_206",
+            "train_id": "T17",
+            "start_time": "18:55:55",
+            "end_time": "19:46:42"
+        },
+        {
+            "trip_id": "WK_192",
+            "train_id": "T07",
+            "start_time": "18:59:30",
+            "end_time": "19:49:55"
+        },
+        {
+            "trip_id": "WK_207",
+            "train_id": "T02",
+            "start_time": "19:02:55",
+            "end_time": "19:53:42"
+        },
+        {
+            "trip_id": "WK_214",
+            "train_id": "T01",
+            "start_time": "19:06:30",
+            "end_time": "19:56:55"
+        },
+        {
+            "trip_id": "WK_203",
+            "train_id": "T09",
+            "start_time": "19:10:00",
+            "end_time": "20:01:08"
+        },
+        {
+            "trip_id": "WK_215",
+            "train_id": "T12",
+            "start_time": "19:13:30",
+            "end_time": "20:03:36"
+        },
+        {
+            "trip_id": "WK_208",
+            "train_id": "T11",
+            "start_time": "19:18:30",
+            "end_time": "20:09:38"
+        },
+        {
+            "trip_id": "WK_216",
+            "train_id": "T20",
+            "start_time": "19:20:30",
+            "end_time": "20:10:55"
+        },
+        {
+            "trip_id": "WK_209",
+            "train_id": "T13",
+            "start_time": "19:27:00",
+            "end_time": "20:18:08"
+        },
+        {
+            "trip_id": "WK_217",
+            "train_id": "T23",
+            "start_time": "19:27:30",
+            "end_time": "20:18:35"
+        },
+        {
+            "trip_id": "WK_218",
+            "train_id": "T14",
+            "start_time": "19:34:30",
+            "end_time": "20:24:28"
+        },
+        {
+            "trip_id": "WK_210",
+            "train_id": "T10",
+            "start_time": "19:35:30",
+            "end_time": "20:26:48"
+        },
+        {
+            "trip_id": "WK_211",
+            "train_id": "T18",
+            "start_time": "19:38:25",
+            "end_time": "19:45:50"
+        },
+        {
+            "trip_id": "WK_219",
+            "train_id": "T22",
+            "start_time": "19:43:00",
+            "end_time": "20:32:58"
+        },
+        {
+            "trip_id": "WK_212",
+            "train_id": "T16",
+            "start_time": "19:45:00",
+            "end_time": "20:36:28"
+        },
+        {
+            "trip_id": "WK_220",
+            "train_id": "T24",
+            "start_time": "19:51:30",
+            "end_time": "20:41:28"
+        },
+        {
+            "trip_id": "WK_213",
+            "train_id": "T17",
+            "start_time": "19:55:00",
+            "end_time": "20:46:38"
+        },
+        {
+            "trip_id": "WK_226",
+            "train_id": "T18",
+            "start_time": "19:58:55",
+            "end_time": "20:06:20"
+        },
+        {
+            "trip_id": "WK_221",
+            "train_id": "T25",
+            "start_time": "20:00:00",
+            "end_time": "20:51:08"
+        },
+        {
+            "trip_id": "WK_227",
+            "train_id": "T09",
+            "start_time": "20:06:00",
+            "end_time": "20:56:38"
+        },
+        {
+            "trip_id": "WK_204",
+            "train_id": "T02",
+            "start_time": "20:08:30",
+            "end_time": "20:58:28"
+        },
+        {
+            "trip_id": "WK_222",
+            "train_id": "T12",
+            "start_time": "20:17:00",
+            "end_time": "21:06:58"
+        },
+        {
+            "trip_id": "WK_228",
+            "train_id": "T07",
+            "start_time": "20:17:00",
+            "end_time": "21:07:28"
+        },
+        {
+            "trip_id": "WK_229",
+            "train_id": "T18",
+            "start_time": "20:20:05",
+            "end_time": "20:27:30"
+        },
+        {
+            "trip_id": "WK_223",
+            "train_id": "T11",
+            "start_time": "20:25:30",
+            "end_time": "21:16:08"
+        },
+        {
+            "trip_id": "WK_233",
+            "train_id": "T18",
+            "start_time": "20:28:00",
+            "end_time": "21:18:28"
+        },
+        {
+            "trip_id": "WK_224",
+            "train_id": "T22",
+            "start_time": "20:35:30",
+            "end_time": "21:25:28"
+        },
+        {
+            "trip_id": "WK_235",
+            "train_id": "T16",
+            "start_time": "20:39:00",
+            "end_time": "21:30:43"
+        },
+        {
+            "trip_id": "WK_225",
+            "train_id": "T24",
+            "start_time": "20:45:30",
+            "end_time": "21:35:28"
+        },
+        {
+            "trip_id": "WK_236",
+            "train_id": "T23",
+            "start_time": "20:50:00",
+            "end_time": "21:40:28"
+        },
+        {
+            "trip_id": "WK_230",
+            "train_id": "T06",
+            "start_time": "20:55:30",
+            "end_time": "21:46:08"
+        },
+        {
+            "trip_id": "WK_238",
+            "train_id": "T25",
+            "start_time": "20:55:55",
+            "end_time": "21:03:20"
+        },
+        {
+            "trip_id": "WK_239",
+            "train_id": "T09",
+            "start_time": "21:02:00",
+            "end_time": "21:52:28"
+        },
+        {
+            "trip_id": "WK_231",
+            "train_id": "T20",
+            "start_time": "21:05:30",
+            "end_time": "21:55:28"
+        },
+        {
+            "trip_id": "WK_240",
+            "train_id": "T13",
+            "start_time": "21:15:00",
+            "end_time": "22:05:28"
+        },
+        {
+            "trip_id": "WK_232",
+            "train_id": "T12",
+            "start_time": "21:15:30",
+            "end_time": "22:05:28"
+        },
+        {
+            "trip_id": "WK_241",
+            "train_id": "T18",
+            "start_time": "21:21:25",
+            "end_time": "21:28:50"
+        },
+        {
+            "trip_id": "WK_244",
+            "train_id": "T18",
+            "start_time": "21:30:00",
+            "end_time": "22:20:28"
+        },
+        {
+            "trip_id": "WK_234",
+            "train_id": "T25",
+            "start_time": "21:30:00",
+            "end_time": "22:19:58"
+        },
+        {
+            "trip_id": "WK_237",
+            "train_id": "T23",
+            "start_time": "21:45:00",
+            "end_time": "22:34:58"
+        },
+        {
+            "trip_id": "WK_246",
+            "train_id": "T11",
+            "start_time": "21:45:00",
+            "end_time": "22:35:28"
+        },
+        {
+            "trip_id": "WK_247",
+            "train_id": "T16",
+            "start_time": "21:51:25",
+            "end_time": "21:58:50"
+        },
+        {
+            "trip_id": "WK_242",
+            "train_id": "T22",
+            "start_time": "22:00:00",
+            "end_time": "22:49:58"
+        },
+        {
+            "trip_id": "WK_248",
+            "train_id": "T16",
+            "start_time": "22:00:00",
+            "end_time": "22:50:09"
+        },
+        {
+            "trip_id": "WK_243",
+            "train_id": "T24",
+            "start_time": "22:15:00",
+            "end_time": "23:04:58"
+        },
+        {
+            "trip_id": "WK_249",
+            "train_id": "T13",
+            "start_time": "22:15:00",
+            "end_time": "23:05:09"
+        },
+        {
+            "trip_id": "WK_252",
+            "train_id": "T25",
+            "start_time": "22:30:00",
+            "end_time": "23:21:24"
+        },
+        {
+            "trip_id": "WK_245",
+            "train_id": "T09",
+            "start_time": "22:30:00",
+            "end_time": "23:21:02"
+        },
+        {
+            "trip_id": "WK_255",
+            "train_id": "T18",
+            "start_time": "22:36:28",
+            "end_time": "22:43:53"
+        },
+        {
+            "trip_id": "WK_250",
+            "train_id": "T11",
+            "start_time": "22:36:58",
+            "end_time": "23:17:49"
+        },
+        {
+            "trip_id": "WK_254",
+            "train_id": "T18",
+            "start_time": "22:51:28",
+            "end_time": "22:58:53"
+        }
+    ]
+}
