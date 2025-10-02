@@ -8,8 +8,13 @@ cmds = [
 ]
 
 
+
 [phases.build]
-cmds = ["pnpm run build"]
+cmds = [
+  "pnpm run build",
+  "ls -l dist/server",
+  "ls -l dist/server/routes"
+]
 
 [phases.start]
 cmds = ["pnpm start"]
