@@ -12,6 +12,7 @@
     "moduleDetection": "force",
   "noEmit": false,
   "outDir": "dist",
+  "rootDir": ".",
     "jsx": "react-jsx",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
