@@ -7,8 +7,9 @@ cmds = [
   "pnpm install --frozen-lockfile --prefer-offline"
 ]
 
+
 [phases.build]
-cmds = []
+cmds = ["pnpm run build"]
 
 [phases.start]
 cmds = ["pnpm start"]
