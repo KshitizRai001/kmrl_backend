@@ -33,11 +33,8 @@
     }
   },
   "include": [
-    "client/**/*",
-    "backend/server/**/*",
-    "shared/**/*",
-    "vite.config.ts",
-    "vite.config.server.ts"
+    "server/**/*",
+    "shared/**/*"
   ],
   "exclude": ["node_modules", "dist"]
 }
