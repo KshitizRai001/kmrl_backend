@@ -13,6 +13,7 @@
   "scripts": {
   "build": "tsc",
   "postbuild": "node -e \"const fs=require('fs');const p='./dist/server';if(!fs.existsSync(p)){console.log('Warning: ./dist/server not found');process.exit(0);}console.log(fs.readdirSync(p))\"",
+  "prestart": "node -e \"const fs=require('fs');const cp=require('child_process');const target='./dist/server/node-build.js';if(!fs.existsSync(target)){console.log('dist missing, installing dev deps and building...');cp.execSync('pnpm install --frozen-lockfile --include=dev',{stdio:'inherit'});cp.execSync('pnpm run build',{stdio:'inherit'});}else{console.log('dist exists, skipping build')}\"",
   "start": "node dist/server/node-build.js"
   },
   "files": [
