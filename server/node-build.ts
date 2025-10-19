@@ -12,14 +12,14 @@ const distPath = path.join(__dirname, "../spa");
 // Serve static files
 app.use(express.static(distPath));
 
-// Handle React Router - serve index.html for all non-API routes
-app.get("*", (req, res) => {
-  // Don't serve index.html for API routes
-  if (req.path.startsWith("/api/") || req.path.startsWith("/health")) {
-    return res.status(404).json({ error: "API endpoint not found" });
-  }
-
-  res.sendFile(path.join(distPath, "index.html"));
+// Handle React Router - serve index.html for all non-API GET routes
+// Use middleware instead of app.get('*', ...) because path-to-regexp v8 throws
+// when parsing '*' alone. This middleware only handles GET requests that
+// aren't API or health paths and falls back to next() otherwise.
+app.use((req, res, next) => {
+  if (req.method !== 'GET') return next();
+  if (req.path.startsWith('/api/') || req.path.startsWith('/health')) return next();
+  res.sendFile(path.join(distPath, 'index.html'));
 });
 
 app.listen(port, () => {
