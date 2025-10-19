@@ -12,8 +12,7 @@
   },
   "scripts": {
   "build": "tsc",
-  "postbuild": "node -e \"const fs=require('fs');const p='./dist/server';if(!fs.existsSync(p)){console.log('Warning: ./dist/server not found');process.exit(0);}console.log(fs.readdirSync(p))\"",
-  "prestart": "node -e \"const fs=require('fs');const cp=require('child_process');const target='./dist/server/node-build.js';if(!fs.existsSync(target)){console.log('dist missing, installing dev deps and building...');cp.execSync('pnpm install --frozen-lockfile --include=dev',{stdio:'inherit'});cp.execSync('pnpm run build',{stdio:'inherit'});}else{console.log('dist exists, skipping build')}\"",
+  "postbuild": "node -e \"const fs=require('fs'),cp=require('child_process');console.log('cwd',process.cwd());try{console.log('node',cp.execSync('node -v').toString().trim())}catch(e){}try{console.log('pnpm',cp.execSync('pnpm -v').toString().trim())}catch(e){}try{console.log('tsc',cp.execSync('npx tsc -v').toString().trim())}catch(e){}console.log('tsconfig exists',fs.existsSync('tsconfig.json'));try{console.log('server files',fs.readdirSync('server'))}catch(e){console.log('cannot list server dir',e.message)}const p='./dist/server';if(!fs.existsSync(p)){console.log('Warning: ./dist/server not found');process.exit(0)}console.log('dist/server:',fs.readdirSync(p))\"",
   "start": "node dist/server/node-build.js"
   },
   "files": [

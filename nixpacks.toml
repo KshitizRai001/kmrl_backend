@@ -12,8 +12,10 @@ cmds = [
 [phases.build]
 cmds = [
   "pnpm run build",
-  "ls -l dist/server",
-  "ls -l dist/server/routes"
+  "echo '--- build done, listing dist ---'",
+  "ls -la dist || true",
+  "ls -la dist/server || true",
+  "ls -la dist/server/routes || true"
 ]
 
 [phases.start]
