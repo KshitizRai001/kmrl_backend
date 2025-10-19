@@ -2,9 +2,9 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 // import { handleDemo } from "./routes/demo";
-import { handleIngest } from "./routes/ingest";
-import { handleTrainModel, handleGetModels, handlePredict } from "./routes/ml";
-import { handleGenerateSchedule, handleGetScheduleHistory, handleGetScheduleDetails } from "./routes/scheduling";
+import { handleIngest } from "./routes/ingest.js";
+import { handleTrainModel, handleGetModels, handlePredict } from "./routes/ml.js";
+import { handleGenerateSchedule, handleGetScheduleHistory, handleGetScheduleDetails } from "./routes/scheduling.js";
 
 export function createServer() {
   const app = express();
@@ -22,7 +22,7 @@ export function createServer() {
 
   // app.get("/api/demo", handleDemo);
   app.post("/api/ingest", handleIngest);
-  
+ 
   // ML API routes
   app.post("/api/ml/train", handleTrainModel);
   app.get("/api/ml/models", handleGetModels);
