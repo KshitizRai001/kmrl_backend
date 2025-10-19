@@ -1,165 +1,243 @@
-# 01_generate_advanced_input.py (Refactored with Shunting Data)
-
-import pandas as pd
-import numpy as np
 import json
-from datetime import datetime, timedelta
-import random
-import joblib
+from ortools.sat.python import cp_model
+from datetime import datetime, date
 import os
 
-print("Starting Advanced Input Data Generation...")
-
-# --- Configuration ---
-NUM_TRAINS = 25
-PLANNING_DATE = datetime.now()
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-INPUT_DIR = os.path.join(BASE_DIR, "daily_input")
-SOURCE_DATA_DIR = os.path.join(BASE_DIR, "source_data")
-
-# --- 1. Process GTFS Data ---
-def process_gtfs_data(gtfs_path, planning_date):
+def solve_advanced_schedule(input_data):
     """
-    Loads GTFS data, calculates trip details, and determines next-day start requirements.
+    Solves the train scheduling problem with a comprehensive multi-objective function.
+    This version includes the final fix for the MODEL_INVALID error by simplifying the cleaning constraint.
     """
-    print("  Processing GTFS data...")
-    try:
-        trips_df = pd.read_csv(os.path.join(gtfs_path, 'trips.txt'))
-        shapes_df = pd.read_csv(os.path.join(gtfs_path, 'shapes.txt'))
-        stop_times_df = pd.read_csv(os.path.join(gtfs_path, 'stop_times.txt'))
-        
-        # --- Process all trips first ---
-        shape_distances = shapes_df.groupby('shape_id')['shape_dist_traveled'].max().reset_index()
-        shape_distances = shape_distances.rename(columns={'shape_dist_traveled': 'distance_km'})
-
-        stop_times_df['departure_time_td'] = pd.to_timedelta(stop_times_df['departure_time'])
-        stop_times_df['arrival_time_td'] = pd.to_timedelta(stop_times_df['arrival_time'])
-        
-        start_stops = stop_times_df.loc[stop_times_df.groupby('trip_id')['stop_sequence'].idxmin()]
-        end_stops = stop_times_df.loc[stop_times_df.groupby('trip_id')['stop_sequence'].idxmax()]
-        
-        trip_terminals = pd.merge(
-            start_stops[['trip_id', 'stop_id']], end_stops[['trip_id', 'stop_id']],
-            on='trip_id', suffixes=('_start', '_end')
-        )
-        
-        trip_times = stop_times_df.groupby('trip_id').agg(
-            start_time=('departure_time_td', 'min'),
-            end_time=('arrival_time_td', 'max')
-        ).reset_index()
-        trip_times['duration_hours'] = (trip_times['end_time'] - trip_times['start_time']).dt.total_seconds() / 3600
-        
-        all_trip_details = pd.merge(trips_df, shape_distances, on='shape_id', how='left')
-        all_trip_details = pd.merge(all_trip_details, trip_times, on='trip_id', how='left')
-        all_trip_details = pd.merge(all_trip_details, trip_terminals, on='trip_id', how='left')
-        all_trip_details.dropna(subset=['distance_km', 'duration_hours'], inplace=True)
-
-        # --- Get details for the PLANNING_DATE ---
-        service_id_today = 'WK' if planning_date.weekday() < 6 else 'WE'
-        today_trips = all_trip_details[all_trip_details['service_id'] == service_id_today].copy()
-        
-        # Identify late evening trips for shunting calculation
-        LATE_EVENING_START_TIME = timedelta(hours=22)
-        today_trips['is_late_evening'] = today_trips['end_time'] > LATE_EVENING_START_TIME
-        
-        # --- Get details for the NEXT DAY'S morning departures ---
-        next_day = planning_date + timedelta(days=1)
-        service_id_next_day = 'WK' if next_day.weekday() < 6 else 'WE'
-        next_day_trips = all_trip_details[all_trip_details['service_id'] == service_id_next_day].copy()
-        
-        MORNING_RUSH_END_TIME = timedelta(hours=7)
-        next_morning_trips = next_day_trips[next_day_trips['start_time'] < MORNING_RUSH_END_TIME]
-        
-        next_day_starts = next_morning_trips.groupby('stop_id_start').size().to_dict()
-        
-        # Convert timedeltas to strings for JSON
-        today_trips['start_time'] = today_trips['start_time'].astype(str).str.split(' ').str[-1]
-        today_trips['end_time'] = today_trips['end_time'].astype(str).str.split(' ').str[-1]
-
-        print(f"    -> Processed {len(today_trips)} trips for {planning_date.date()} (Service ID: {service_id_today})")
-        print(f"    -> Next morning requires starts: {next_day_starts}")
-        
-        return today_trips, next_day_starts
-
-    except FileNotFoundError as e:
-        print(f"Error: {e}. Make sure GTFS files are in '{gtfs_path}'")
-        return None, None
-
-# --- 2. Generate Synthetic Fleet Data ---
-def generate_synthetic_data(num_trains, planning_date):
-    print("  Generating synthetic fleet data...")
-    try:
-        anomaly_model = joblib.load("anomaly_model.joblib")
-        print("    -> Anomaly detection model loaded.")
-    except FileNotFoundError:
-        print("Error: Model file 'anomaly_model.joblib' not found. Please run '00_train_anomaly_model.py' first.")
-        return None, None, None, None
-
-    train_ids = [f"T{str(i).zfill(2)}" for i in range(1, num_trains + 1)]
-    fleet_df = pd.DataFrame({'train_id': train_ids})
-    fleet_df['initial_mileage_km'] = np.random.normal(loc=80000, scale=20000, size=num_trains).astype(int)
     
-    # +++ MODIFIED PART: Using your exact column names for simulation +++
-    health_scores = []
-    sensor_features = [
-        'TP2', 'TP3', 'H1', 'DV_pressure', 'Reservoirs', 'Oil_temperature', 
-        'Motor_current', 'COMP', 'DV_eletric', 'Towers', 'MPG', 'LPS', 
-        'Pressure_switch', 'Oil_level', 'Caudal_impulses', 'gpsSpeed' # Corrected 'Caudal_impulses'
-    ]
+    # --- 1. DATA PREPARATION ---
+    trains = input_data['trains']
+    trips = input_data['trips']
+    shunting_distances_data = input_data['shunting_distances']
+    average_fleet_mileage = input_data['average_fleet_mileage']
+    depot_resources = input_data['depot_resources']
     
-    for train_id in train_ids:
-        if random.random() < 0.2:
-            simulated_sensors = [np.random.uniform(low=100, high=200) for _ in sensor_features]
-        else:
-            simulated_sensors = [np.random.uniform(low=10, high=50) for _ in sensor_features]
-        
-        sensor_df = pd.DataFrame([simulated_sensors], columns=sensor_features)
-        
-        anomaly_score = anomaly_model.decision_function(sensor_df)[0]
-        risk_score = 1 / (1 + np.exp(anomaly_score))
-        health_scores.append(round(risk_score, 4))
-        
-    fleet_df['health_score'] = health_scores
-    print("    -> Generated predictive health scores for all trains.")
-
-    # ... (The rest of the function remains the same) ...
-    fleet_df['last_deep_clean_date'] = [planning_date.date() - timedelta(days=random.randint(1, 10)) for _ in range(num_trains)]
-    fleet_df['telecom_cert_expiry_date'] = [planning_date.date() + timedelta(days=random.randint(-2, 30)) for _ in range(num_trains)]
-    fleet_df['stock_cert_expiry_date'] = [planning_date.date() + timedelta(days=random.randint(5, 60)) for _ in range(num_trains)]
-    fleet_df['signal_cert_expiry_km'] = fleet_df['initial_mileage_km'] + np.random.randint(1000, 5000, size=num_trains)
-
-    for col in ['last_deep_clean_date', 'telecom_cert_expiry_date', 'stock_cert_expiry_date']:
-        fleet_df[col] = fleet_df[col].astype(str)
-
-    job_cards_df = pd.DataFrame({'train_id': random.sample(train_ids, k=3), 'status': 'OPEN'})
-    ad_contracts_df = pd.DataFrame({'train_id': random.sample(train_ids, k=5), 'contract_total_hours': np.random.randint(100, 200, size=5).tolist(), 'hours_completed': np.random.randint(20, 100, size=5).tolist()})
-    depot_resources = {"cleaning_bays": 4, "deep_clean_threshold_days": 7}
-
-    return fleet_df, job_cards_df, ad_contracts_df, depot_resources
-
-# --- Main Execution ---
-if __name__ == "__main__":
-    os.makedirs(INPUT_DIR, exist_ok=True)
-
-    trip_details_df, next_day_starts = process_gtfs_data(SOURCE_DATA_DIR, PLANNING_DATE)
+    train_ids = [t['train_id'] for t in trains]
+    trip_ids = [t['trip_id'] for t in trips]
     
-    if trip_details_df is not None:
-        fleet_df, job_cards_df, ad_contracts_df, depot_resources = generate_synthetic_data(NUM_TRAINS, PLANNING_DATE)
+    train_map = {t['train_id']: t for t in trains}
+    trip_map = {t['trip_id']: t for t in trips}
+    
+    all_stop_ids = set()
+    for r in shunting_distances_data:
+        all_stop_ids.add(r['from_stop_id']); all_stop_ids.add(r['to_stop_id'])
+    for t in trips:
+        all_stop_ids.add(t['start_stop_id']); all_stop_ids.add(t['end_stop_id'])
+    
+    sorted_stop_ids = sorted(list(all_stop_ids))
+    stop_id_to_int = {stop_id: i for i, stop_id in enumerate(sorted_stop_ids)}
+    
+    for trip in trips:
+        start_h, start_m, start_s = map(int, trip['start_time'].split(':'))
+        trip['start_sec'] = (start_h * 3600) + (start_m * 60) + start_s
+        end_h, end_m, end_s = map(int, trip['end_time'].split(':'))
+        trip['end_sec'] = (end_h * 3600) + (end_m * 60) + end_s
+        if trip['end_sec'] < trip['start_sec']:
+            trip['end_sec'] += 24 * 3600
+
+    HORIZON = 86400 * 2 
+
+    # --- 2. MODEL CREATION & VARIABLES ---
+    model = cp_model.CpModel()
+    assignments = { (t_id, p_id): model.NewBoolVar(f'assign_{t_id}_{p_id}') for t_id in train_ids for p_id in trip_ids }
+
+    # --- 3. HARD CONSTRAINTS ---
+    for p_id in trip_ids:
+        model.AddAtMostOne(assignments[(t_id, p_id)] for t_id in train_ids)
+
+    for t_id in train_ids:
+        for i in range(len(trips)):
+            for j in range(i + 1, len(trips)):
+                trip1, trip2 = trips[i], trips[j]
+                if max(trip1['start_sec'], trip2['start_sec']) < min(trip1['end_sec'], trip2['end_sec']):
+                    model.AddBoolOr([assignments[(t_id, trip1['trip_id'])].Not(), assignments[(t_id, trip2['trip_id'])].Not()])
+
+    trains_requiring_cleaning = [t for t in trains if t.get('cleaning_required_hours', 0) > 0]
+    for t_id in train_ids:
+        train = train_map[t_id]
+        # Forbid trains from service if they have job cards, expired certs, OR are scheduled for cleaning
+        if train['has_open_job_card'] or not train['is_fully_certified'] or train in trains_requiring_cleaning:
+            for p_id in trip_ids:
+                model.Add(assignments[(t_id, p_id)] == 0)
+
+    # --- Cleaning Bay Capacity Constraint ---
+    cleaning_bays_capacity = depot_resources.get("Muttom Depot", {}).get("cleaning_bays", 0)
+    cleaning_intervals = []
+    
+    for train in trains_requiring_cleaning:
+        t_id = train['train_id']
+        duration_sec = int(train['cleaning_required_hours'] * 3600)
         
-        daily_input_data = {
-            "planning_date": PLANNING_DATE.strftime('%Y-%m-%d'),
-            "fleet_details": fleet_df.to_dict(orient='records'),
-            "job_cards": job_cards_df.to_dict(orient='records'),
-            "ad_contracts": ad_contracts_df.to_dict(orient='records'),
-            "depot_resources": depot_resources,
-            "trip_details": trip_details_df.to_dict(orient='records'),
-            "next_day_starts": next_day_starts  # NEW: Add next day's data
-        }
+        start_var = model.NewIntVar(0, HORIZON - duration_sec, f'clean_start_{t_id}')
+        end_var = model.NewIntVar(0, HORIZON, f'clean_end_{t_id}')
+        interval_var = model.NewIntervalVar(start_var, duration_sec, end_var, f'clean_interval_{t_id}')
+        cleaning_intervals.append(interval_var)
+
+    if cleaning_intervals and cleaning_bays_capacity > 0:
+        model.AddCumulative(cleaning_intervals, [1] * len(cleaning_intervals), cleaning_bays_capacity)
+
+    # --- 4. MULTI-OBJECTIVE CALCULATIONS ---
+    total_trips_serviced = sum(assignments.values())
+
+    num_stops = len(sorted_stop_ids)
+    distance_matrix = [[0] * num_stops for _ in range(num_stops)]
+    for r in shunting_distances_data:
+        from_idx, to_idx = stop_id_to_int.get(r['from_stop_id']), stop_id_to_int.get(r['to_stop_id'])
+        if from_idx is not None and to_idx is not None:
+            distance_matrix[from_idx][to_idx] = int(r['distance_km'] * 10)
+    flat_distance_matrix = [item for sublist in distance_matrix for item in sublist]
+    
+    train_shunting_distances = []
+    for t_id in train_ids:
+        is_train_used = model.NewBoolVar(f'used_{t_id}')
+        model.Add(sum(assignments[(t_id, p['trip_id'])] for p in trips) > 0).OnlyEnforceIf(is_train_used)
+        model.Add(sum(assignments[(t_id, p['trip_id'])] for p in trips) == 0).OnlyEnforceIf(is_train_used.Not())
+        min_start_time, max_end_time = model.NewIntVar(0, HORIZON, f'min_start_{t_id}'), model.NewIntVar(0, HORIZON, f'max_end_{t_id}')
+        potential_start_times, potential_end_times = [], []
+        for p in trips:
+            start_var, end_var = model.NewIntVar(0, HORIZON, f'start_var_{t_id}_{p["trip_id"]}'), model.NewIntVar(0, HORIZON, f'end_var_{t_id}_{p["trip_id"]}')
+            model.Add(start_var == p['start_sec']).OnlyEnforceIf(assignments[(t_id, p['trip_id'])])
+            model.Add(start_var == HORIZON).OnlyEnforceIf(assignments[(t_id, p['trip_id'])].Not())
+            potential_start_times.append(start_var)
+            model.Add(end_var == p['end_sec']).OnlyEnforceIf(assignments[(t_id, p['trip_id'])])
+            model.Add(end_var == 0).OnlyEnforceIf(assignments[(t_id, p['trip_id'])].Not())
+            potential_end_times.append(end_var)
+        model.AddMinEquality(min_start_time, potential_start_times)
+        model.AddMaxEquality(max_end_time, potential_end_times)
+        first_trip_loc_idx, last_trip_loc_idx = model.NewIntVar(0, num_stops - 1, f'first_loc_idx_{t_id}'), model.NewIntVar(0, num_stops - 1, f'last_loc_idx_{t_id}')
+        potential_first_locs, potential_last_locs = [], []
+        for p in trips:
+            is_first, is_last = model.NewBoolVar(f'is_first_{t_id}_{p["trip_id"]}'), model.NewBoolVar(f'is_last_{t_id}_{p["trip_id"]}')
+            min_matches, max_matches = model.NewBoolVar(f'min_match_{t_id}_{p["trip_id"]}'), model.NewBoolVar(f'max_match_{t_id}_{p["trip_id"]}')
+            model.Add(min_start_time == p['start_sec']).OnlyEnforceIf(min_matches)
+            model.Add(min_start_time != p['start_sec']).OnlyEnforceIf(min_matches.Not())
+            model.AddBoolAnd([assignments[(t_id, p['trip_id'])], min_matches]).OnlyEnforceIf(is_first)
+            model.Add(max_end_time == p['end_sec']).OnlyEnforceIf(max_matches)
+            model.Add(max_end_time != p['end_sec']).OnlyEnforceIf(max_matches.Not())
+            model.AddBoolAnd([assignments[(t_id, p['trip_id'])], max_matches]).OnlyEnforceIf(is_last)
+            potential_first_locs.append(is_first * stop_id_to_int.get(p['start_stop_id'], 0))
+            potential_last_locs.append(is_last * stop_id_to_int.get(p['end_stop_id'], 0))
+        model.Add(first_trip_loc_idx == sum(potential_first_locs))
+        model.Add(last_trip_loc_idx == sum(potential_last_locs))
+        shunting_dist_for_train = model.NewIntVar(0, 500, f'shunt_dist_{t_id}')
+        index_var = model.NewIntVar(0, len(flat_distance_matrix) - 1, f'index_{t_id}')
+        model.Add(index_var == last_trip_loc_idx * num_stops + first_trip_loc_idx)
+        model.AddElement(index_var, flat_distance_matrix, shunting_dist_for_train)
+        final_shunting_dist = model.NewIntVar(0, 500, f'final_shunt_dist_{t_id}')
+        model.Add(final_shunting_dist == shunting_dist_for_train).OnlyEnforceIf(is_train_used)
+        model.Add(final_shunting_dist == 0).OnlyEnforceIf(is_train_used.Not())
+        train_shunting_distances.append(final_shunting_dist)
+    total_shunting_distance = sum(train_shunting_distances)
+    mileage_deviations = []
+    for t_id in train_ids:
+        initial_mileage = int(train_map[t_id]['mileage'])
+        mileage_from_trips = sum(int(trip_map[p_id]['distance_km']) * assignments[(t_id, p_id)] for p_id in trip_ids)
+        final_mileage = model.NewIntVar(initial_mileage, initial_mileage + 20000, f'final_mileage_{t_id}')
+        model.Add(final_mileage == initial_mileage + mileage_from_trips)
+        deviation = model.NewIntVar(0, 100000, f'dev_{t_id}')
+        model.AddAbsEquality(deviation, final_mileage - int(average_fleet_mileage))
+        mileage_deviations.append(deviation)
+    total_mileage_deviation = sum(mileage_deviations)
+    branding_hours_scaled = []
+    for t_id in train_ids:
+        if train_map[t_id]['has_branding_contract']:
+            duration_in_seconds = sum( (trip_map[p_id]['end_sec'] - trip_map[p_id]['start_sec']) * assignments[(t_id, p_id)] for p_id in trip_ids )
+            branding_hours_scaled.append(duration_in_seconds)
+    total_branding_duration_scaled = sum(branding_hours_scaled)
+
+    # --- 5. FINAL WEIGHTED OBJECTIVE FUNCTION ---
+    model.Maximize(
+        total_trips_serviced * 100000
+        - total_shunting_distance * 100
+        - total_mileage_deviation * 1
+        + total_branding_duration_scaled
+    )
+
+    # --- 6. SOLVER INVOCATION ---
+    print("Solving the schedule with full multi-objective function...")
+    solver = cp_model.CpSolver()
+    solver.parameters.max_time_in_seconds = 180.0
+    status = solver.Solve(model)
+    print(f"Solver status: {solver.StatusName(status)}")
+
+    # --- 7. PROCESS AND SAVE SOLUTION ---
+    if status in [cp_model.OPTIMAL, cp_model.FEASIBLE]:
+        print("Solution found. Processing output...")
+        solved_shunting_distances = {train_ids[i]: solver.Value(train_shunting_distances[i]) / 10.0 for i in range(len(train_ids))}
         
-        file_date = PLANNING_DATE.strftime('%Y-%m-%d')
-        output_filename = os.path.join(INPUT_DIR, f"{file_date}_input_data.json")
+        trip_assignments, serviced_trips = [], set()
+        train_usage = {t_id: [] for t_id in train_ids}
+
+        for t_id in train_ids:
+            for p_id in trip_ids:
+                if solver.Value(assignments[(t_id, p_id)]):
+                    trip_info = trip_map[p_id]
+                    trip_assignments.append({ 'trip_id': p_id, 'train_id': t_id, 'start_time': trip_info['start_time'], 'end_time': trip_info['end_time'] })
+                    serviced_trips.add(p_id)
+                    train_usage[t_id].append(trip_info)
         
-        with open(output_filename, 'w') as f:
-            json.dump(daily_input_data, f, indent=4)
+        induction_ranking = []
+        for t_id in train_ids:
+            train_info = train_map[t_id]
+            actual_shunting_km = solved_shunting_distances.get(t_id, 0)
             
-        print(f"\nData generation complete. Consolidated input file saved to:\n{output_filename}")
+            status_text, reason = "", ""
+            if train_info['has_open_job_card']:
+                status_text, reason = "HELD FOR MAINTENANCE", "Open Job Card from Maximo"
+            elif not train_info['is_fully_certified']:
+                status_text, reason = "HELD FOR CERTIFICATION", "One or more fitness certificates have expired"
+            elif train_info.get('cleaning_required_hours', 0) > 0:
+                 status_text, reason = "HELD FOR CLEANING", f"Scheduled for {train_info['cleaning_required_hours']} hour cleaning task"
+            elif train_usage[t_id]:
+                status_text, reason = "IN SERVICE", f"Assigned to {len(train_usage[t_id])} trips"
+            else:
+                status_text, reason = "STANDBY", "Optimized for shunting/mileage or not required for service"
+
+            final_mileage_val = train_info['mileage'] + sum(t['distance_km'] for t in train_usage[t_id])
+
+            induction_ranking.append({
+                "Train ID": t_id, "Status": status_text, "Reason": reason,
+                "Shunting Distance (km)": actual_shunting_km,
+                "Final Mileage": f"{final_mileage_val:.3f}",
+                "Health Score": train_info.get('anomaly_score', 0.5)
+            })
+        
+        total_shunting_km = sum(solved_shunting_distances.values())
+        output_solution = {
+            'planning_date': input_data['planning_date'],
+            'solver_status': solver.StatusName(status),
+            'total_shunting_km': round(total_shunting_km, 2),
+            'total_mileage_deviation': round(solver.Value(total_mileage_deviation), 2) if status in [cp_model.OPTIMAL, cp_model.FEASIBLE] else 'N/A',
+            'trips_serviced': len(serviced_trips),
+            'trips_unserviced': len(trip_ids) - len(serviced_trips),
+            'induction_ranking': induction_ranking,
+            'trip_assignments': trip_assignments
+        }
+
+        output_filename = f"daily_solution/{input_data['planning_date']}_solution_details.json"
+        os.makedirs("daily_solution", exist_ok=True)
+        with open(output_filename, 'w') as f:
+            json.dump(output_solution, f, indent=4)
+        print(f"Solution saved to {output_filename}")
+        
+    else:
+        print("No solution found.")
+
+if __name__ == '__main__':
+    print("Starting Advanced Schedule Solver...")
+    planning_date = date.today()
+    planning_date_str = planning_date.strftime('%Y-%m-%d')
+    input_file_path = f'daily_input/{planning_date_str}_input_data.json'
+    
+    print(f"Loading input data from {input_file_path}...")
+    try:
+        with open(input_file_path, 'r') as f:
+            input_data = json.load(f)
+        solve_advanced_schedule(input_data)
+    except FileNotFoundError:
+        print(f"Error: Input file not found at {input_file_path}")
+
