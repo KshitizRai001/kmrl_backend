@@ -35,6 +35,5 @@ data
 .env
 load-ids.txt
 
-server
 tmp
 types
