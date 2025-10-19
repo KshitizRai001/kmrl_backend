@@ -1,18 +1,17 @@
 FROM node:18-bullseye
 
 # Install system deps for Python and build tools
-RUN apt-get update && apt-get install -y python3 python3-pip build-essential ca-certificates --no-install-recommends && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+		apt-get install -y python3 python3-pip python3-dev build-essential ca-certificates \ 
+			libgomp1 libatlas-base-dev libopenblas-dev libblas-dev liblapack-dev gfortran pkg-config --no-install-recommends && \
+		rm -rf /var/lib/apt/lists/*
 
 # Use corepack to manage pnpm
 RUN corepack enable && corepack prepare pnpm@10.14.0 --activate || true
 
 WORKDIR /app
 
-# Copy package manifests first for caching
-COPY package.json pnpm-lock.yaml ./
-COPY backend/package.json backend/pnpm-lock.yaml backend/
-
-# Copy the full repo
+# Copy the full repository into the container
 COPY . .
 
 # Install python requirements for the advanced model (optional; failure won't break JS build)
