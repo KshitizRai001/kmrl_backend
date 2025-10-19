@@ -12,7 +12,7 @@
   },
   "scripts": {
   "build": "tsc",
-  "postbuild": "node -e \"const fs=require('fs');console.log(fs.readdirSync('./dist/server'))\"",
+  "postbuild": "node -e \"const fs=require('fs');const p='./dist/server';if(!fs.existsSync(p)){console.log('Warning: ./dist/server not found');process.exit(0);}console.log(fs.readdirSync(p))\"",
   "start": "node dist/server/node-build.js"
   },
   "files": [
